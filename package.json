@@ -4,12 +4,19 @@
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.5",
+    "@types/lodash": "^4.14.121",
     "@types/node": "11.9.4",
     "@types/react": "16.8.3",
     "@types/react-dom": "16.8.1",
+    "antd": "^3.13.2",
+    "axios": "^0.18.0",
+    "bootstrap-css-only": "^4.3.1",
+    "gh-pages": "^2.0.1",
+    "lodash": "^4.17.11",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-scripts": "2.1.5",
+    "react-use": "^5.3.0",
     "typescript": "3.3.3"
   },
   "scripts": {
@@ -26,5 +33,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "homepage": "."
 }

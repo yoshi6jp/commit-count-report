@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useCallback, useContext } from 'react';
 import './App.css';
+import { Card } from 'antd';
+import { Provider } from './Provider';
+import { Header } from './Header';
+import { Form } from './Form';
+import { Overview } from './Overview';
+import { UrlInputField, TargetInputField } from './InputFieled';
+import { DurationField } from './DurationField';
+import { SubmitBtn } from './SubmitBtn';
+import { Result } from './Result';
+import { Info } from './Info';
+import { useWait } from 'react-use';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <useWait.Waiter>
+      <Provider>
+        <Header />
+        <div className="container">
+          <Overview />
+          <Card>
+            <Form>
+              <UrlInputField />
+              <TargetInputField />
+              <DurationField />
+              <SubmitBtn />
+              <Result />
+              <Info />
+            </Form>
+          </Card>
+        </div>
+      </Provider>
+    </useWait.Waiter>
+  );
+};
 
 export default App;

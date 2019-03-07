@@ -1,7 +1,7 @@
-import React, { useContext, useCallback } from 'react';
-import { DatePicker } from 'antd';
-import { RootContext } from './Provider';
-import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import React, { useContext, useCallback } from "react";
+import { DatePicker } from "antd";
+import { RootContext } from "./Provider";
+import { RangePickerValue } from "antd/lib/date-picker/interface";
 const { RangePicker } = DatePicker;
 export const DurationField = () => {
   const { setDuration } = useContext(RootContext);
@@ -9,8 +9,8 @@ export const DurationField = () => {
     (dates: RangePickerValue) => {
       const [sinceM, untilM] = dates;
       if (sinceM && untilM) {
-        const since = sinceM.startOf('day').toISOString();
-        const until = untilM.endOf('day').toISOString();
+        const since = sinceM.startOf("day").toISOString();
+        const until = untilM.endOf("day").toISOString();
         setDuration({ since, until });
       }
     },
@@ -19,7 +19,7 @@ export const DurationField = () => {
   return (
     <div className="form-group row">
       <label className="col-sm-3 col-form-label">
-        Search Duration (Option)
+        Search Duration (Option):
       </label>
       <div className="col-sm-9">
         <RangePicker onChange={onChange} />

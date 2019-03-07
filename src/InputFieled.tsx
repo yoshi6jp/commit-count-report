@@ -47,7 +47,7 @@ const InputFieldFactory = ({
 export const UrlInputField = InputFieldFactory({
   label: 'GitHub Repository URL:',
   placeholder: 'naohirotamura/faasshell',
-  prepend: 'https://github.com',
+  prepend: 'https://github.com/',
   setter: 'setUrl'
 });
 

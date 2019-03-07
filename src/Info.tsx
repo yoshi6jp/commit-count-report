@@ -1,6 +1,17 @@
-import React from 'react';
+import React from "react";
 export const Info = () => (
   <>
+    <p>
+      All results are logged into{" "}
+      <a
+        href="https://docs.google.com/spreadsheets/d/1ywCxG8xTKOYK89AEZIqgpTvbvpbrb1s4H_bMVvKV59I/edit#gid=0"
+        title="Google Sheets"
+        target="_blank"
+      >
+        Google Sheets
+      </a>
+      .
+    </p>
     <small className="from-text text-muted">
       Get Commit Count button privdes the same effect as the following git
       command:

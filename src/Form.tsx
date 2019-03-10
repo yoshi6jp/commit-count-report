@@ -1,17 +1,19 @@
-import React, { useCallback, useContext } from 'react';
-import { RootContext } from './Provider';
-import { useWait } from 'react-use';
+import React, { useCallback, useContext } from "react";
+import { RootContext } from "./Provider";
+import { ActionTypes } from "./actions";
 export const Form = ({ children }: { children: React.ReactNode }) => {
-  const { getCommitCount } = useContext(RootContext);
-  const { isWaiting } = useWait();
+  const {
+    dispatch,
+    state: { waiting }
+  } = useContext(RootContext);
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
-      if (!isWaiting('fetch')) {
-        getCommitCount();
+      if (!waiting) {
+        dispatch({ type: ActionTypes.GET_COMMIT_COUNT });
       }
       e.preventDefault();
     },
-    [getCommitCount, isWaiting]
+    [dispatch, waiting]
   );
   return <form onSubmit={onSubmit}>{children}</form>;
 };

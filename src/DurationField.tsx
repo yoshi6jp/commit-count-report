@@ -2,19 +2,20 @@ import React, { useContext, useCallback } from "react";
 import { DatePicker } from "antd";
 import { RootContext } from "./Provider";
 import { RangePickerValue } from "antd/lib/date-picker/interface";
+import { ActionTypes } from "./actions";
 const { RangePicker } = DatePicker;
 export const DurationField = () => {
-  const { setDuration } = useContext(RootContext);
+  const { dispatch } = useContext(RootContext);
   const onChange = useCallback(
     (dates: RangePickerValue) => {
       const [sinceM, untilM] = dates;
       if (sinceM && untilM) {
         const since = sinceM.startOf("day").toISOString();
         const until = untilM.endOf("day").toISOString();
-        setDuration({ since, until });
+        dispatch({ type: ActionTypes.SET_DURATION, payload: { since, until } });
       }
     },
-    [setDuration]
+    [dispatch]
   );
   return (
     <div className="form-group row">

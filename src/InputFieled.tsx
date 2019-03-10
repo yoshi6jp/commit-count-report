@@ -1,27 +1,30 @@
-import React, { useContext, useCallback } from 'react';
-import _ from 'lodash';
-import { RootContext } from './Provider';
+import React, { useContext, useCallback, Dispatch } from "react";
+import { ActionTypes, Actions } from "./actions";
+import _ from "lodash";
+import { RootContext } from "./Provider";
 interface InputFieldFactoryProps {
   id?: string;
   label: string;
   prepend?: string;
-  setter: 'setUrl' | 'setTarget';
   placeholder: string;
+  onChange: (value: string, dispatch: Dispatch<Actions>) => void;
 }
 const InputFieldFactory = ({
   label,
   placeholder,
   prepend,
-  setter,
-  id = _.uniqueId('input')
+  id = _.uniqueId("input"),
+  onChange
 }: InputFieldFactoryProps) => () => {
-  const { [setter]: setValue } = useContext(RootContext);
-  const onChange = useCallback(
+  const { dispatch } = useContext(RootContext);
+
+  const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
+      onChange(e.target.value, dispatch);
     },
-    [setValue]
+    [onChange, dispatch]
   );
+
   return (
     <div className="form-group row">
       <label htmlFor={id} className="col-sm-3 col-form-label">
@@ -34,7 +37,7 @@ const InputFieldFactory = ({
           </div>
         )}
         <input
-          onChange={onChange}
+          onChange={handleChange}
           required
           className="form-control"
           id={id}
@@ -45,14 +48,18 @@ const InputFieldFactory = ({
   );
 };
 export const UrlInputField = InputFieldFactory({
-  label: 'GitHub Repository URL:',
-  placeholder: 'naohirotamura/faasshell',
-  prepend: 'https://github.com/',
-  setter: 'setUrl'
+  label: "GitHub Repository URL:",
+  placeholder: "naohirotamura/faasshell",
+  prepend: "https://github.com/",
+  onChange: (value, dispatch) => {
+    dispatch({ type: ActionTypes.SET_URL, payload: value });
+  }
 });
 
 export const TargetInputField = InputFieldFactory({
   label: "Commiter's search string:",
-  placeholder: 'fujitsu.com',
-  setter: 'setTarget'
+  placeholder: "fujitsu.com",
+  onChange: (value, dispatch) => {
+    dispatch({ type: ActionTypes.SET_TARGET, payload: value });
+  }
 });

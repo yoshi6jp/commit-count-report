@@ -3,6 +3,7 @@ import { DatePicker } from "antd";
 import { RootContext } from "./Provider";
 import { RangePickerValue } from "antd/lib/date-picker/interface";
 import { ActionTypes } from "./actions";
+import moment, { Moment } from "moment";
 const { RangePicker } = DatePicker;
 export const DurationField = () => {
   const { dispatch } = useContext(RootContext);
@@ -17,13 +18,24 @@ export const DurationField = () => {
     },
     [dispatch]
   );
+  const disabledDate = useCallback((current: Moment | undefined) => {
+    return !!(current && current >= moment().endOf("day"));
+  }, []);
+  const defaultValue: [Moment, Moment] = [
+    moment().subtract(1, "year"),
+    moment()
+  ];
   return (
     <div className="form-group row">
       <label className="col-sm-3 col-form-label">
         Search Duration (Option):
       </label>
       <div className="col-sm-9">
-        <RangePicker onChange={onChange} />
+        <RangePicker
+          onChange={onChange}
+          disabledDate={disabledDate}
+          defaultPickerValue={defaultValue}
+        />
       </div>
     </div>
   );
